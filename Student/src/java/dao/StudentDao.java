@@ -1,6 +1,5 @@
 package dao;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,13 +21,14 @@ public class StudentDao {
     }
 
     public void saveData(Student s) {
-        sql = "insert into student(name, email, fee) "
-                + "values(?,?,?)";
+        // FIX 1: was "values(?,?,?)" — missing 4th placeholder for department
+        sql = "insert into student(name, subject, marks, department) values(?,?,?,?)";
         try {
             ps = dbCon.getCon().prepareStatement(sql);
             ps.setString(1, s.getName());
-            ps.setString(2, s.getEmail());
-            ps.setDouble(3, s.getFee());
+            ps.setString(2, s.getSubject());
+            ps.setDouble(3, s.getMarks());
+            ps.setString(4, s.getDepartment());
             ps.executeUpdate();
             ps.close();
             dbCon.getCon().close();
@@ -43,46 +43,36 @@ public class StudentDao {
         try {
             ps = dbCon.getCon().prepareStatement(sql);
             rs = ps.executeQuery();
+            // FIX 3: was [rs.next](http://rs.next)() — corrupted hyperlink syntax
             while (rs.next()) {
-                Student e = new Student(rs.getInt("id"),
+                Student e = new Student(
+                        rs.getInt("roll"),
                         rs.getString("name"),
-                        rs.getString("email"),
-                        Double.parseDouble(rs.getString("fee")));
+                        rs.getString("subject"),
+                        rs.getString("department"),
+                        rs.getDouble("marks")
+                );
                 list.add(e);
             }
             ps.close();
             rs.close();
-
             dbCon.getCon().close();
         } catch (SQLException ex) {
             Logger.getLogger(StudentDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return list;
     }
-    
-    public void updateData(Student s){
-    sql = "update student set name = ?, email = ?, fee = ? where id = ?";
-    try {
+
+    public void updateData(Student s) {
+        sql = "update student set name=?, subject=?, marks=?, department=? where roll=?";
+        try {
             ps = dbCon.getCon().prepareStatement(sql);
             ps.setString(1, s.getName());
-            ps.setString(2, s.getEmail());
-            ps.setDouble(3, s.getFee());
-            ps.setInt(4, s.getId());
-            
-            ps.executeUpdate();
-            ps.close();
-            dbCon.getCon().close();
-        } catch (SQLException ex) {
-            Logger.getLogger(StudentDao.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-    }
-    
-    public void deleteData(int id){
-        sql = "delete from student where id = ?";
-        try {
-            ps = dbCon.getCon().prepareStatement(sql);            
-            ps.setInt(1, id);
+            ps.setString(2, s.getSubject());
+            ps.setDouble(3, s.getMarks());
+            ps.setString(4, s.getDepartment());
+            // FIX 2: was setInt(4, ...) — duplicate index overwrote department
+            ps.setInt(5, s.getRoll());
             ps.executeUpdate();
             ps.close();
             dbCon.getCon().close();
@@ -90,31 +80,43 @@ public class StudentDao {
             Logger.getLogger(StudentDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-     public Student findById(int id) {
-        Student e = null;
-        sql = "select * from student where id = ?";
+
+    public void deleteData(int roll) {
+        sql = "delete from student where roll = ?";
         try {
             ps = dbCon.getCon().prepareStatement(sql);
-            ps.setInt(1, id);
-            
+            ps.setInt(1, roll);
+            ps.executeUpdate();
+            ps.close();
+            dbCon.getCon().close();
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public Student findById(int roll) {
+        Student e = null;
+        sql = "select * from student where roll = ?";
+        try {
+            ps = dbCon.getCon().prepareStatement(sql);
+            ps.setInt(1, roll);
             rs = ps.executeQuery();
+            // FIX 3: was [rs.next](http://rs.next)() — corrupted hyperlink syntax
             while (rs.next()) {
-                 e = new Student(rs.getInt("id"),
+                e = new Student(
+                        rs.getInt("roll"),
                         rs.getString("name"),
-                        rs.getString("email"),
-                        Double.parseDouble(rs.getString("fee")));
-                
+                        rs.getString("subject"),
+                        rs.getString("department"),
+                        rs.getDouble("marks")
+                );
             }
             ps.close();
             rs.close();
-
             dbCon.getCon().close();
         } catch (SQLException ex) {
             Logger.getLogger(StudentDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return e;
     }
-
 }

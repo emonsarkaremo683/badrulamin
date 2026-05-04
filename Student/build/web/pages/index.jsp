@@ -256,9 +256,10 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th><i class="bi bi-hash"></i> ID</th>
+                                    <th><i class="bi bi-hash"></i> Roll</th>
                                     <th><i class="bi bi-person"></i> Name</th>
-                                    <th><i class="bi bi-envelope"></i> Email</th>
+                                    <th><i class="bi bi-envelope"></i> Subject</th>
+                                    <th><i class="bi bi-envelope"></i> Departments</th>
                                     <th><i class="bi bi-currency-dollar"></i> Fee</th>                                
                                     <th><i class="bi bi-gear"></i> Actions</th>
                                 </tr>
@@ -266,16 +267,17 @@
                             <tbody>
                                 <c:forEach items="${list}" var="emp">
                                     <tr>
-                                        <td><strong>${emp.id}</strong></td>
+                                        <td><strong>${emp.roll}</strong></td>
                                         <td>${emp.name}</td>
-                                        <td>${emp.email}</td>
-                                        <td>${emp.fee}</td>
+                                        <td>${emp.subject}</td>
+                                        <td>${emp.department}</td>
+                                        <td>${emp.marks}</td>
                                         <td>
                                             <div class="action-buttons">
-                                                <a href="/student?action=edit&id=${emp.id}" class="btn-action btn-edit">
+                                                <a href="/student?action=edit&id=${emp.roll}" class="btn-action btn-edit">
                                                     <i class="bi bi-pencil-square"></i> Edit
                                                 </a>
-                                                <a href="/student?action=delete&id=${emp.id}" class="btn-action btn-delete" 
+                                                <a href="/student?action=delete&id=${emp.roll}" class="btn-action btn-delete" 
                                                    onclick="return confirm('Are you sure you want to delete this student?');">
                                                     <i class="bi bi-trash"></i> Delete
                                                 </a>

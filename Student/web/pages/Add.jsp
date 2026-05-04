@@ -245,35 +245,41 @@
             <div class="form-group">
                 <label for="designation">
                     <i class="bi bi-envelope"></i>
-                    Email <span class="required-indicator">*</span>
+                    Subject <span class="required-indicator">*</span>
                 </label>
                 <input 
                     type="text" 
                     class="form-control" 
-                    id="designation" 
-                    name="email" 
-                    placeholder="e.g., email@gmail.com"
-                    required
-                    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                    title="Designation should contain only letters and spaces"
+                    id="subject" 
+                    name="subject" 
+                    
+                />
+            </div>
+            <div class="form-group">
+                <label for="designation">
+                    <i class="bi bi-envelope"></i>
+                    Department <span class="required-indicator">*</span>
+                </label>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="department" 
+                    name="department" 
+                    
                 />
             </div>
             
             <div class="form-group">
                 <label for="salary">
                     <i class="bi bi-currency-dollar"></i>
-                    Fee <span class="required-indicator">*</span>
+                    Marks <span class="required-indicator">*</span>
                 </label>
                 <input 
                     type="number" 
                     class="form-control" 
-                    id="salary" 
-                    name="fee" 
-                    placeholder="Enter fee amount"
-                    step="0.01" 
-                    min="0"
-                    required 
-                    title="Please enter a valid salary amount"
+                    id="marks" 
+                    name="marks" 
+                   
                 />
             </div>
             

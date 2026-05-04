@@ -248,7 +248,7 @@
 
             <form action="/student" method="post" onsubmit="return validateForm()">
                 <input type="hidden" name="action" value="update" />
-                <input type="hidden" name="id" value="<%= e.getId() %>" />
+                <input type="hidden" name="id" value="<%= e.getRoll() %>" />
 
                 <div class="form-group">
                     <label for="name">
@@ -271,37 +271,44 @@
                 <div class="form-group">
                     <label for="email">
                         <i class="bi bi-envelope"></i>
-                        Email <span class="required-indicator">*</span>
+                        Subject <span class="required-indicator">*</span>
                     </label>
                     <input 
                         type="text" 
                         class="form-control" 
-                        id="email" 
-                        name="email" 
-                        value="<%= e.getEmail() %>"
-                        placeholder="e.g., admin@gmail.com"
-                        required
-                        pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                        title="Enter a valid email address"
+                        id="subject" 
+                        name="subject" 
+                        value="<%= e.getSubject() %>"
+                        
+                        />
+                </div>
+                 <div class="form-group">
+                    <label for="email">
+                        <i class="bi bi-envelope"></i>
+                        Department <span class="required-indicator">*</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        id="subject" 
+                        name="department" 
+                        value="<%= e.getDepartment() %>"
+                        
                         />
                 </div>
 
                 <div class="form-group">
                     <label for="fee">
                         <i class="bi bi-currency-dollar"></i>
-                        Fee <span class="required-indicator">*</span>
+                        Marks <span class="required-indicator">*</span>
                     </label>
                     <input 
                         type="number" 
                         class="form-control" 
-                        id="fee" 
-                        name="fee" 
-                        value="<%= e.getFee() %>"
-                        placeholder="Enter fee amount"
-                        step="0.01" 
-                        min="0"
-                        required 
-                        title="Please enter a valid fee amount"
+                        id="marks" 
+                        name="marks" 
+                        value="<%= e.getMarks() %>"
+                       
                         />
                 </div>
 

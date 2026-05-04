@@ -4,32 +4,34 @@ package model;
 
 public class Student {
     
-    int id;
-    String name, email;
-    double fee;
+   int roll;
+   String name, subject, department;
+   double marks;
 
     public Student() {
     }
 
-    public Student(String name, String email, double fee) {
+    public Student(String name, String subject, String department, double marks) {
         this.name = name;
-        this.email = email;
-        this.fee = fee;
+        this.subject = subject;
+        this.department = department;
+        this.marks = marks;
     }
 
-    public Student(int id, String name, String email, double fee) {
-        this.id = id;
+    public Student(int roll, String name, String subject, String department, double marks) {
+        this.roll = roll;
         this.name = name;
-        this.email = email;
-        this.fee = fee;
+        this.subject = subject;
+        this.department = department;
+        this.marks = marks;
     }
 
-    public int getId() {
-        return id;
+    public int getRoll() {
+        return roll;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setRoll(int roll) {
+        this.roll = roll;
     }
 
     public String getName() {
@@ -40,22 +42,31 @@ public class Student {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getSubject() {
+        return subject;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
-    public double getFee() {
-        return fee;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setFee(double fee) {
-        this.fee = fee;
+    public void setDepartment(String department) {
+        this.department = department;
     }
-    
+
+    public double getMarks() {
+        return marks;
+    }
+
+    public void setMarks(double marks) {
+        this.marks = marks;
+    }
+   
+   
     
     
 }
